@@ -1,0 +1,20 @@
+<mat-form-field>
+  <input #theInput matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchAirportsCtrl">
+  <button mat-button *ngIf="searchAirportsCtrl.value" matSuffix mat-icon-button aria-label="Clear" (click)="onTextRemoved()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="this.onOptionSelected()" [displayWith]="displayFn">
+    <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+    <ng-container *ngIf="!isLoading">
+      <mat-option *ngFor="let airport of filteredAirports" [value]="airport">
+        <span><b>{{airport.code}}</b> ({{airport.name}})</span>
+      </mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</mat-form-field>
+
+<br>
+
+<ng-container *ngIf="errorMsg">
+  {{errorMsg}}
+</ng-container>

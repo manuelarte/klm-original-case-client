@@ -1,0 +1,36 @@
+<div *ngIf="origin != null && destination != null else noSelected">
+  <mat-card>
+    <div *ngIf="!isLoading; else loading">
+      <mat-card-title>Fare for {{origin?.code}} to {{destination?.code}}</mat-card-title>
+      <mat-card-content>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="From" [value]="origin.name" disabled="true">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input  matInput placeholder="To" [value]="destination.name" disabled="true">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <span matPrefix><mat-icon mat-list-icon>{{getSymbol()}}</mat-icon></span>
+          <input type="tel" matInput placeholder="Amount" [value]="fare.amount" disabled="true">
+        </mat-form-field>
+      </mat-card-content>
+    </div>
+    <ng-template #loading>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-template>
+  </mat-card>
+
+
+
+</div>
+
+<ng-template #noSelected>
+  <mat-card>
+    You need to select origin and destination
+  </mat-card>
+</ng-template>
+
+

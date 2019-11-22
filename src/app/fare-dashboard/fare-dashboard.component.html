@@ -1,0 +1,23 @@
+<div class="row mainDiv">
+  <div class="col">
+    <mat-card class="select-card">
+      <mat-card-title>Select origin</mat-card-title>
+      <mat-card-content>
+        <app-search-code (airportSelected)="setOrigin($event)"></app-search-code>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col">
+    <mat-card class="select-card">
+      <mat-card-title>Select destination</mat-card-title>
+      <mat-card-content>
+        <app-search-code (airportSelected)="setDestination($event)"></app-search-code>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div class="card mainDiv">
+  <app-fare [origin]="origin" [destination]="destination"></app-fare>
+</div>
