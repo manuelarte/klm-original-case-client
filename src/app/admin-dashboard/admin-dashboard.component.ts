@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ServerService} from "../server.service";
+import {tap} from "rxjs/operators";
+import {Statistics} from "../../model/statistics";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  private isLoading = true
+  private statistics: Statistics
+
+  constructor(private serverService: ServerService) { }
 
   ngOnInit() {
+    this.serverService.statistics()
+      .pipe(
+        tap( () => this.isLoading = true)
+      ).subscribe(data => {
+      this.isLoading = false
+      this.statistics = data
+    },
+      error => {
+        this.isLoading = false
+      })
   }
 
 }

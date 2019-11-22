@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Airport} from "../model/airport";
 import {map} from "rxjs/operators";
 import {Fare} from "../model/fare";
+import {Statistics} from "../model/statistics";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class ServerService {
     return this.http.get<Fare>(`http://localhost:9000/travel/users/fares/${origin}/${destination}`)
   }
 
-  private _filter(text: string, data: Airport[]): Airport[] {
-    console.log("Filtering ", text)
-    return data.filter(it => it.code.toLowerCase().includes(text))
+  statistics(): Observable<Statistics> {
+    return this.http.get<Statistics>(`http://localhost:9000/travel/admin/statistics`)
   }
+
 }

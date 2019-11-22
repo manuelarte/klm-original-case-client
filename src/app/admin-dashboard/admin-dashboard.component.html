@@ -1,1 +1,53 @@
-<p>admin-dashboard works!</p>
+<mat-card>
+  <mat-card-title>Admin dashboard</mat-card-title>
+  <mat-card-content *ngIf="!isLoading; else loading">
+    <div class="row mainDiv">
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="number of request" [value]="statistics.totalNumberRequestsProcessed" disabled="true">
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="number of request 2xx" [value]="statistics.totalNumberRequest2xx" disabled="true">
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="number of request 4xx" [value]="statistics.totalNumberRequest4xx" disabled="true">
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="number of request 5xx" [value]="statistics.totalNumberRequest5xx" disabled="true">
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="row mainDiv">
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="average response time (ms)" [value]="statistics.averageResponse" disabled="true">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="max response time (ms)" [value]="statistics.maxResponse" disabled="true">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="min response time (ms)" [value]="statistics.minResponse" disabled="true">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-template>
+
+</mat-card>

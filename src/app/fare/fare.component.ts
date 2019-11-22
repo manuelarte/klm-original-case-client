@@ -36,7 +36,6 @@ export class FareComponent implements OnInit, OnChanges {
       .pipe(
         tap( () => this.isLoading = true)
       ).subscribe(data => {
-      console.log("data", data)
       this.isLoading = false
       this.fare = data
     })
