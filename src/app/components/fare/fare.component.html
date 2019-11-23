@@ -13,9 +13,13 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <span matPrefix><mat-icon mat-list-icon>{{getSymbol()}}</mat-icon></span>
+          <span matPrefix>
+            <mat-icon mat-list-icon *ngIf="fare?.currency === 'USD'">attach_money</mat-icon>
+            <mat-icon mat-list-icon *ngIf="fare?.currency === 'EUR'">euro</mat-icon>
+          </span>
           <input type="tel" matInput placeholder="Amount" [value]="fare.amount" disabled="true">
         </mat-form-field>
+
       </mat-card-content>
     </div>
     <ng-template #loading>

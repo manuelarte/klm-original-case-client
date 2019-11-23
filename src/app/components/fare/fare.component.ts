@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Airport} from "../../model/airport";
-import {ServerService} from "../server.service";
+import {Airport} from "../../models/airport";
+import {ServerService} from "../../services/server.service";
 import {tap} from "rxjs/operators";
-import {Fare} from "../../model/fare";
+import {Fare} from "../../models/fare";
 
 @Component({
   selector: 'app-fare',
@@ -39,16 +39,6 @@ export class FareComponent implements OnInit, OnChanges {
       this.isLoading = false
       this.fare = data
     })
-  }
-
-  getSymbol(): string {
-    let symbol;
-    if (this.fare.currency == 'USD') {
-      symbol = "euro"
-    } else {
-      symbol = "attach_money"
-    }
-    return symbol
   }
 
 }

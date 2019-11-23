@@ -1,6 +1,6 @@
 import {Airport} from "./airport";
 
-export class Fare {
+export interface Fare {
 
   amount: number;
   currency: string;

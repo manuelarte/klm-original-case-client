@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Airport} from "../../model/airport";
+import {Airport} from "../../models/airport";
 
 @Component({
   selector: 'app-fare-dashboard',

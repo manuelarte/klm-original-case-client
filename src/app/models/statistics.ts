@@ -1,4 +1,4 @@
-export class Statistics {
+export interface Statistics {
 
   totalNumberRequestsProcessed: number;
   totalNumberRequest2xx: number;

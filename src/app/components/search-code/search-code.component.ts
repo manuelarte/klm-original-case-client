@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {debounceTime, finalize, map, startWith, switchMap, tap} from "rxjs/operators";
-import {Airport} from "../../model/airport";
-import {ServerService} from "../server.service";
+import {Airport} from "../../models/airport";
+import {ServerService} from "../../services/server.service";
 import {pipe} from "rxjs";
 
 @Component({

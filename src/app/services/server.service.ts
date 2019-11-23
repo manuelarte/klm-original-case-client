@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Airport} from "../model/airport";
+import {Airport} from "../models/airport";
 import {map} from "rxjs/operators";
-import {Fare} from "../model/fare";
-import {Statistics} from "../model/statistics";
+import {Fare} from "../models/fare";
+import {Statistics} from "../models/statistics";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,10 @@ export class ServerService {
 
   // I don't know how to make it work in the backend the rest endpoint with the term param
   search(term: string, page = 1): Observable<Airport[]> {
-    return this.http.get<Airport[]>('http://localhost:9000/travel/users/airports')
+    return this.http.get<Airport[]>(environment.backendUrl + '/travel/users/airports')
       .pipe(
         map((response: any) => {
           let mapped = response._embedded.locations
-            .map(airport => new Airport(airport.code, airport.name, airport.description))
             .filter(airport => airport.code.toUpperCase().includes(term))
           return mapped;
         })
@@ -27,11 +27,11 @@ export class ServerService {
   }
 
   fare(origin: string, destination: string): Observable<Fare> {
-    return this.http.get<Fare>(`http://localhost:9000/travel/users/fares/${origin}/${destination}`)
+    return this.http.get<Fare>(environment.backendUrl + `/travel/users/fares/${origin}/${destination}`)
   }
 
   statistics(): Observable<Statistics> {
-    return this.http.get<Statistics>(`http://localhost:9000/travel/admin/statistics`)
+    return this.http.get<Statistics>(environment.backendUrl + `/travel/admin/statistics`)
   }
 
 }
