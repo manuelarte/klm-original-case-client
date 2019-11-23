@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material/sidenav";
 
@@ -7,7 +7,7 @@ import {MatSidenav} from "@angular/material/sidenav";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   @ViewChild(MatSidenav, {static: false}) sidenav: MatSidenav;
   title = 'original-case-client';
 
