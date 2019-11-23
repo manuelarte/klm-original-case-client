@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl} from "@angular/forms";
-import {debounceTime, finalize, map, startWith, switchMap, tap} from "rxjs/operators";
+import {debounceTime, finalize, map, startWith, switchMap, takeUntil, tap} from "rxjs/operators";
 import {Airport} from "../../models/airport";
 import {ServerService} from "../../services/server.service";
-import {pipe} from "rxjs";
+import {pipe, Subject} from "rxjs";
 
 @Component({
   selector: 'app-search-code',
   templateUrl: './search-code.component.html',
   styleUrls: ['./search-code.component.scss']
 })
-export class SearchCodeComponent implements OnInit {
+export class SearchCodeComponent implements OnInit, OnDestroy {
 
   @Output() airportSelected = new EventEmitter<Airport>();
 
@@ -18,6 +18,8 @@ export class SearchCodeComponent implements OnInit {
   filteredAirports: Airport[];
   isLoading = false;
   errorMsg: string;
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private serverService: ServerService) { }
 
@@ -42,8 +44,7 @@ export class SearchCodeComponent implements OnInit {
               this.isLoading = false
             }),
           )
-        )
-      )
+        ), takeUntil(this.destroy$))
       .subscribe(data => {
         if (data == undefined) {
           this.errorMsg = "Error loading";
@@ -53,6 +54,11 @@ export class SearchCodeComponent implements OnInit {
           this.filteredAirports = data;
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
   onOptionSelected() {
